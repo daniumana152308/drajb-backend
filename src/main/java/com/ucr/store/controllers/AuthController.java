@@ -1,0 +1,43 @@
+package com.ucr.store.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import com.ucr.store.dto.LoginDto;
+import com.ucr.store.entities.Client;
+import com.ucr.store.models.LoginResponseModel;
+import com.ucr.store.repositories.ClientRepository;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/auth")
+@CrossOrigin("*")
+public class AuthController {
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDto dto) {
+
+        Client client = clientRepository.findByEmail(dto.email())
+            .orElse(null);
+
+        if (client == null || !passwordEncoder.matches(dto.password(), client.getPasswordHash())) {
+            return ResponseEntity.status(401).body("Credenciales inválidas");
+        }
+
+        return ResponseEntity.ok(new LoginResponseModel(
+            client.getId(),
+            client.getFirstName(),
+            client.getLastName(),
+            client.getEmail()
+        ));
+    }
+}

@@ -1,0 +1,59 @@
+package com.ucr.store.facade;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ucr.store.dto.ServiceEntityDto;
+import com.ucr.store.mappers.ServiceEntityMapper;
+import com.ucr.store.models.ServiceEntityResponseModel;
+import com.ucr.store.services.ServiceEntityService;
+
+@Component
+public class ServiceEntityFacade
+        implements IServiceEntityFacade {
+
+    @Autowired
+    private ServiceEntityService serviceEntityService;
+
+    @Autowired
+    private ServiceEntityMapper serviceEntityMapper;
+
+    @Override
+    public List<ServiceEntityResponseModel> getAll() {
+
+        return serviceEntityMapper.toResponseModelList(
+                serviceEntityService.getAllServices());
+    }
+
+    @Override
+    public ServiceEntityResponseModel getById(Long id) {
+
+        return serviceEntityMapper.toResponseModel(
+                serviceEntityService.getServiceById(id));
+    }
+
+    @Override
+    public ServiceEntityResponseModel create(
+            ServiceEntityDto dto) {
+
+        return serviceEntityMapper.toResponseModel(
+                serviceEntityService.createService(dto));
+    }
+
+    @Override
+    public ServiceEntityResponseModel update(
+            Long id,
+            ServiceEntityDto dto) {
+
+        return serviceEntityMapper.toResponseModel(
+                serviceEntityService.updateService(id, dto));
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        serviceEntityService.deleteService(id);
+    }
+}

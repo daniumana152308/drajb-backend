@@ -1,0 +1,59 @@
+package com.ucr.store.facade;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ucr.store.dto.ShoppingCartDto;
+import com.ucr.store.mappers.ShoppingCartMapper;
+import com.ucr.store.models.ShoppingCartResponseModel;
+import com.ucr.store.services.ShoppingCartService;
+
+@Component
+public class ShoppingCartFacade
+        implements IShoppingCartFacade {
+
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    private ShoppingCartMapper shoppingCartMapper;
+
+    @Override
+    public List<ShoppingCartResponseModel> getAll() {
+
+        return shoppingCartMapper.toResponseModelList(
+                shoppingCartService.getAllCarts());
+    }
+
+    @Override
+    public ShoppingCartResponseModel getById(Long id) {
+
+        return shoppingCartMapper.toResponseModel(
+                shoppingCartService.getCartById(id));
+    }
+
+    @Override
+    public ShoppingCartResponseModel create(
+            ShoppingCartDto dto) {
+
+        return shoppingCartMapper.toResponseModel(
+                shoppingCartService.createCart(dto));
+    }
+
+    @Override
+    public ShoppingCartResponseModel update(
+            Long id,
+            ShoppingCartDto dto) {
+
+        return shoppingCartMapper.toResponseModel(
+                shoppingCartService.updateCart(id, dto));
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        shoppingCartService.deleteCart(id);
+    }
+}

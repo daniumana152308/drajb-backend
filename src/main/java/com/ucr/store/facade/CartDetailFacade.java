@@ -1,0 +1,58 @@
+package com.ucr.store.facade;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ucr.store.dto.CartDetailDto;
+import com.ucr.store.mappers.CartDetailMapper;
+import com.ucr.store.models.CartDetailResponseModel;
+import com.ucr.store.services.CartDetailService;
+
+@Component
+public class CartDetailFacade implements ICartDetailFacade {
+
+    @Autowired
+    private CartDetailService cartDetailService;
+
+    @Autowired
+    private CartDetailMapper cartDetailMapper;
+
+    @Override
+    public List<CartDetailResponseModel> getAll() {
+
+        return cartDetailMapper.toResponseModelList(
+                cartDetailService.getAllCartDetails());
+    }
+
+    @Override
+    public CartDetailResponseModel getById(Long id) {
+
+        return cartDetailMapper.toResponseModel(
+                cartDetailService.getCartDetailById(id));
+    }
+
+    @Override
+    public CartDetailResponseModel create(
+            CartDetailDto dto) {
+
+        return cartDetailMapper.toResponseModel(
+                cartDetailService.createCartDetail(dto));
+    }
+
+    @Override
+    public CartDetailResponseModel update(
+            Long id,
+            CartDetailDto dto) {
+
+        return cartDetailMapper.toResponseModel(
+                cartDetailService.updateCartDetail(id, dto));
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        cartDetailService.deleteCartDetail(id);
+    }
+}
