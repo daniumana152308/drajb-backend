@@ -136,19 +136,19 @@ git push origin feature/tu-rama
 - ISizeFacade.java
 - IShoppingCartFacade.java
 - ICartDetailFacade.java
-- ProductMapper.java
-- DesignMapper.java
-- SizeMapper.java
+- ProductMapper.java -Completado
+- DesignMapper.java -Completado
+- SizeMapper.java -Completado
 - ShoppingCartMapper.java
 - CartDetailMapper.java
-- Product.java
-- Design.java
-- Size.java
+- Product.java -Completado
+- Design.java -Completado
+- Size.java -Completado
 - ShoppingCart.java
 - CartDetail.java
-- ProductDto.java
-- DesignDto.java
-- SizeDto.java
+- ProductDto.java -Completado
+- DesignDto.java -Completado
+- SizeDto.java -Completado
 - ShoppingCartDto.java
 - CartDetailDto.java
 
