@@ -14,4 +14,4 @@ public interface IServiceEntityService {
     ServiceEntityDto updateService(Long id, ServiceEntityDto dto);
 
     void deleteService(Long id);
-}
+} 
