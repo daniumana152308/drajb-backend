@@ -6,8 +6,7 @@ import java.time.LocalDateTime;
 public record SalesResponseModel(
     Long id,
     Long clientId,
-    Long cartId,
-    BigDecimal total,
     LocalDateTime saleDate,
+    BigDecimal totalAmount,
     String status
 ) {}
