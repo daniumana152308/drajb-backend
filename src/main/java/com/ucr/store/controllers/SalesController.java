@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ucr.store.dto.SalesDto;
 import com.ucr.store.facade.ISalesFacade;
+import com.ucr.store.models.ClientSalesSummaryResponseModel;
+import com.ucr.store.models.SaleFullDetailResponseModel;
 import com.ucr.store.models.SalesResponseModel;
 
 import jakarta.validation.Valid;
@@ -56,5 +58,19 @@ public class SalesController {
 
         salesFacade.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<ClientSalesSummaryResponseModel>> getClientSalesHistory(
+            @PathVariable Long clientId) {
+
+        return ResponseEntity.ok(salesFacade.getClientSalesHistory(clientId));
+    }
+
+    @GetMapping("/{saleId}/details")
+    public ResponseEntity<SaleFullDetailResponseModel> getSaleFullDetail(
+            @PathVariable Long saleId) {
+
+        return ResponseEntity.ok(salesFacade.getSaleFullDetail(saleId));
     }
 }

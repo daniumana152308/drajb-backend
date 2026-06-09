@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import com.ucr.store.dto.SalesDto;
 import com.ucr.store.mappers.SalesMapper;
+import com.ucr.store.models.ClientSalesSummaryResponseModel;
+import com.ucr.store.models.SaleFullDetailResponseModel;
 import com.ucr.store.models.SalesResponseModel;
 import com.ucr.store.services.SalesService;
 
@@ -42,5 +44,15 @@ public class SalesFacade implements ISalesFacade {
     @Override
     public void delete(Long id) {
         salesService.deleteSale(id);
+    }
+
+    @Override
+    public List<ClientSalesSummaryResponseModel> getClientSalesHistory(Long clientId) {
+        return salesService.getSalesHistoryByClientId(clientId);
+    }
+
+    @Override
+    public SaleFullDetailResponseModel getSaleFullDetail(Long saleId) {
+        return salesService.getSaleFullDetail(saleId);
     }
 }
